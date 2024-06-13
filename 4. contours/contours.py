@@ -1,6 +1,7 @@
 # Computer Vision HW4
 import cv2
 import numpy as np
+import os
 
 def fillarea(ctr):
     maxx = np.max(ctr[:, 0]) + 1
@@ -104,15 +105,17 @@ def gaussarea(x,y):
     return(gauss_area)
 
 files=['hand0','US']
+path=os.getcwd()
+
 for file in files:
 
-    o_img=cv2.imread(r'C:\Users\Matt\OneDrive\Virginia Tech\CV\Contour\\'+file+'.png')
+    o_img=cv2.imread(path+'\\images\\'+file+'.png')
     img=np.mean(o_img.copy(),2)
     img=cv2.GaussianBlur(img,(3,3),0)
     img=img.astype(np.uint8)
     threshold,img=cv2.threshold(img,0,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
     img=cv2.copyMakeBorder(img,1,1,1,1,cv2.BORDER_CONSTANT,None,value=(0,0,0))
-    img_out=cv2.imwrite(r'C:\Users\Matt\Desktop\Results\Binary_'+file+'.png',img)
+    img_out=cv2.imwrite(path+'\\results\\'+file+'.png',img)
     bimg=np.zeros(img.shape[:2])
 
     contour=pavlidis(img)
@@ -123,7 +126,7 @@ for file in files:
     print('Filename: '+file+'.png') #File Name
     print(contour.shape[0]) #Vertices
     print(str(gaussarea(xc,yc))) #Gauss Area
-    print(str(fillarea(np.int32(np.concatenate((xc.reshape(-1,1),yc.reshape(-1,1)),axis=1))))) #Flood Area
+    print(str(fillarea(np.int32(np.concatenate((xc.reshape (-1,1),yc.reshape(-1,1)),axis=1))))) #Flood Area
 
     for i in range(1,9):
 
@@ -141,6 +144,6 @@ for file in files:
         dce_points=dce_points.astype(np.int32)
         blank_img_2=np.zeros(img.shape).astype(np.int32)
         dce_img=cv2.polylines(blank_img_2,[dce_points], True, (255,255,255),1)
-        cv2.imwrite(r'C:\Users\Matt\Desktop\Results\\'+file+'DCE_'+str(i)+'.png',dce_img)
+        cv2.imwrite(path+'\\results\\'+file+'DCE_'+str(i)+'.png',dce_img)
 
 

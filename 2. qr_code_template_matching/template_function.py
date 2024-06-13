@@ -1,5 +1,8 @@
 import cv2
 import numpy as np
+import os
+
+path = os.getcwd()
 
 w=99
 x=10
@@ -12,7 +15,7 @@ template=cv2.rectangle(template,(p,p),(w-p-1,w-p-1),(0,0,0),-1)
 template=cv2.rectangle(template,(p+x,p+x),(w-p-1-x,w-p-1-x),(255,255,255),-1)
 template=cv2.rectangle(template,(p+x+x,p+x+x),(w-p-1-x-x,w-p-1-x-x),(0,0,0),-1)
 
-template_out=cv2.imwrite(r'C:\Users\Matt\Desktop\Virginia Tech\CV\template_E.png', template)
+template_out=cv2.imwrite(path+'\\templates\\'+'template_E.png', template)
 
 
 w=128
@@ -26,6 +29,6 @@ template=cv2.rectangle(template,(p,p),(w-p-1,w-p-1),(0,0,0),-1)
 template=cv2.rectangle(template,(p+x,p+x),(w-p-1-x,w-p-1-x),(255,255,255),-1)
 template=cv2.rectangle(template,(p+x+x,p+x+x),(w-p-1-x-x,w-p-1-x-x),(0,0,0),-1)
 
-template_out=cv2.imwrite(r'C:\Users\Matt\Desktop\Virginia Tech\CV\template_AD.png', template)
+template_out=cv2.imwrite(path+'\\templates\\'+'template_AD.png', template)
 
 

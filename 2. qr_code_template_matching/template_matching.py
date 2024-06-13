@@ -1,15 +1,18 @@
 # ECE Homework 2 Finalized Version
 import cv2
 import numpy as np
+import os
 from sklearn.cluster import KMeans
+
+path = os.getcwd()
 
 qrs=['A','B','C','D','E']
 for qr in qrs:
 
-    template_AD=cv2.imread(r'C:\Users\Matt\Desktop\Virginia Tech\CV\template_AD.png',0)
-    template_E=cv2.imread(r'C:\Users\Matt\Desktop\Virginia Tech\CV\template_E.png',0)
-    img = cv2.imread(r'C:\Users\Matt\Desktop\Virginia Tech\CV\QR_'+qr+'.png', 0)
-    img_origin = cv2.imread(r'C:\Users\Matt\Desktop\Virginia Tech\CV\QR_'+qr+'.png')
+    template_AD=cv2.imread(path+'\\templates\\'+'template_AD.png',0)
+    template_E=cv2.imread(path+'\\templates\\'+'template_E.png',0)
+    img = cv2.imread(path+'\\images\\qr_'+qr+'.png', 0)
+    img_origin = cv2.imread(path+'\\images\\qr_'+qr+'.png')
     filename= r'QR_'+qr+'.png'
     img=img.astype(np.float32)
     template_AD=template_AD.astype(np.float32)
@@ -92,9 +95,9 @@ for qr in qrs:
     
     print(filename)
     print(centroids)
-    img_out=cv2.imwrite(r'C:\Users\Matt\Desktop\Virginia Tech\CV\QR\Mask\qr_'+qr+'_res.png', res)
-    mimg_out=cv2.imwrite(r'C:\Users\Matt\Desktop\Virginia Tech\CV\QR\Mask\qr_'+qr+'rect.png', img)
-    warp_out=cv2.imwrite(r'C:\Users\Matt\Desktop\Virginia Tech\CV\QR\Mask\warp'+qr+'.png', warped)
+    img_out=cv2.imwrite(path+'\\results\\qr_'+qr+'_res.png', res)
+    mimg_out=cv2.imwrite(path+'\\results\\qr_'+qr+'rect.png', img)
+    warp_out=cv2.imwrite(path+'\\results\\qr_'+qr+'.png', warped)
     
         
             

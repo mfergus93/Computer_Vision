@@ -1,11 +1,14 @@
 # Computer Vision HW3
 import cv2
 import numpy as np
+import os
+
+path=os.getcwd()
 
 files='AllmanBrothers','CalvinAndHobbes','Chartres','Elvis1956'
 for file in files:
     print(file+'.png')    
-    original_img = cv2.imread(r'C:\Users\Matt\OneDrive\Virginia Tech\CV\Corner Detection\\'+file+'.png')
+    original_img = cv2.imread(path+'\\images\\'+file+'.png')
     original_img=original_img.astype(np.float32)
     img=np.mean(original_img.copy(),2)
     img=cv2.GaussianBlur(img,(15,15),0)  
@@ -21,7 +24,7 @@ for file in files:
         x,y=i.ravel()
         cv2.circle(shit_corner_img,(x,y),5,(0,254,0))
     
-    img_out=cv2.imwrite(r'C:\Users\Matt\Desktop\Results\\'+file+'Shi_Tomasi_Corners.png', shit_corner_img)
+    img_out=cv2.imwrite(path+'\\results\\'+file+'Shi_Tomasi_Corners.png', shit_corner_img)
     
     # Harris Function
     harris_corner_img=original_img.copy()
@@ -70,9 +73,9 @@ for file in files:
             y=int(max_corner_map[r,1])
             x=int(max_corner_map[r,2])
             cv2.circle(harris_corner_img, (x,y),5,(0,0,254))
-    img_out_2=cv2.imwrite(r'C:\Users\Matt\Desktop\Results\\'+file+'_Harris_Corners.png',harris_corner_img)
+    img_out_2=cv2.imwrite(path+'\\results\\'+file+'_Harris_Corners.png',harris_corner_img)
     
     output=np.concatenate((shit_corner_img,harris_corner_img),axis=1)
-    img_out=cv2.imwrite(r'C:\Users\Matt\Desktop\Results\\'+file+'_Concatenate.png',output)
+    img_out=cv2.imwrite(path+'\\results\\'+file+'_Concatenate.png',output)
     
     

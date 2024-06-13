@@ -1,14 +1,17 @@
 #Computer Vision Homework 5 Matt Ferguson
 import cv2
 import numpy as np
+import os
+
+path = os.getcwd()
 
 files=['rio', 'blacksburg', 'diamondhead']
 for file in files:
 
     # Loading
-    img_1=cv2.imread(r'C:\Users\Matt\OneDrive\Virginia Tech\CV\Stitching\\'+file+'-00.png',0)
-    img_2=cv2.imread(r'C:\Users\Matt\OneDrive\Virginia Tech\CV\Stitching\\'+file+'-01.png',0)
-    img_3=cv2.imread(r'C:\Users\Matt\OneDrive\Virginia Tech\CV\Stitching\\'+file+'-02.png',0)
+    img_1=cv2.imread(path+'\\images\\'+file+'-00.png',0)
+    img_2=cv2.imread(path+'\\images\\'+file+'-01.png',0)
+    img_3=cv2.imread(path+'\\images\\'+file+'-02.png',0)
 
     imgs=[img_1,img_2,img_3]
     img_left=img_1
@@ -95,8 +98,8 @@ for file in files:
         output=output[:,0:(x)]
         output=cv2.GaussianBlur(output,(3,3),0)
 
-        cv2.imwrite(r'C:\Users\Matt\Desktop\Results\\'+file+'right'+str(i)+'.png',img_right)
-        cv2.imwrite(r'C:\Users\Matt\Desktop\Results\\'+file+'left'+str(i)+'.png',img_left)
-        cv2.imwrite(r'C:\Users\Matt\Desktop\Results\\'+file+'output'+str(i)+'.png',output)
+        cv2.imwrite(path+'\\results\\'+file+'right'+str(i)+'.png',img_right)
+        cv2.imwrite(path+'\\results\\'+file+'left'+str(i)+'.png',img_left)
+        cv2.imwrite(path+'\\results\\'+file+'output'+str(i)+'.png',output)
         img_left=output
 
